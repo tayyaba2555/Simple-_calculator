@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link rel="stylesheet" href="style.css">
+  <title>FoodExpress - Home</title>
+  
+  <!-- Login & Sign Up Buttons -->
+<div style="margin:16px 0; text-align:center;">
+  <button style="padding:12px 20px; margin-right:12px; border:none; border-radius:8px; background:#8b3cff; color:rgb(211, 177, 177); cursor:pointer;"
+          onclick="window.location.href='login.html'">Login</button>
+
+  <button style="padding:12px 20px; border:2px solid #8b3cff; border-radius:8px; background:white; color:#8b3cff; cursor:pointer;"
+          onclick="window.location.href='signup.html'">Sign Up</button>
+</div>
+<!-- Fixed Profile Button -->
+<div style="position:fixed; top:20px; right:20px; z-index:1000;">
+  <button style="padding:10px 18px; border-radius:8px; border:none; background:#8b3cff; color:white; cursor:pointer;"
+          onclick="window.location.href='profile.html'">Profile</button>
+</div>
+
+
+
+  <!--
+    This is a large, ready-to-use index.html for your Food Delivery Web App.
+    It contains inline CSS and JS so this single file is standalone and >500 lines.
+    You asked for many images and lots of content to copy-paste — so here it is.
+
+    Instructions:
+    1) Save this file as index.html in your project folder.
+    2) Open it in the browser to view the homepage.
+    3) When you're ready for the next file (restaurant.html / script.js / style.css / etc.)
+       type "done" and I'll send the next file.
+  -->
+
+  <style>
+
+    /* -------------------------
+       Base / Reset
+       ------------------------- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    a{color:inherit;text-decoration:none}
+
+    /* -------------------------
+       Layout
+       ------------------------- */
+    header.site-header{background:linear-gradient(90deg,#ff577f,#8b3cff);color:white;padding:16px 20px;position:sticky;top:0;z-index:20;}
+    .container{max-width:1100px;margin:0 auto;padding:18px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:46px;width:46px;border-radius:8px;object-fit:cover}
+    .brand h1{font-size:20px;letter-spacing:0.3px}
+
+    .search-row{display:flex;gap:12px;align-items:center;margin-top:14px}
+    .search-input{flex:1;background:rgba(255,255,255,0.12);padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);color:white}
+    .search-btn{background:rgb(20, 1, 1);color:#5803d8;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
+
+    /* -------------------------
+       Hero
+       ------------------------- */
+    .hero{display:flex;gap:20px;align-items:center;margin:22px 0}
+    .hero-left{flex:1}
+    .hero-right{width:360px}
+    .hero h2{font-size:28px;color:#1b1b1b;margin-bottom:8px}
+    .hero p{color:#333;margin-bottom:14px}
+    .cta{background:#ff577f;color:white;padding:12px 16px;border-radius:12px;display:inline-block}
+
+    /* -------------------------
+       Categories (chips)
+       ------------------------- */
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+    .chip{background:white;padding:8px 12px;border-radius:999px;display:flex;gap:8px;align-items:center;box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+    .chip img{height:28px;width:28px;border-radius:6px;object-fit:cover}
+
+    /* -------------------------
+       Restaurants grid
+       ------------------------- */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+
+    .card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 6px 30px rgba(99,102,241,0.08);transition:transform .18s ease}
+    .card:hover{transform:translateY(-6px)}
+    .card img{width:100%;height:160px;object-fit:cover}
+    .card-body{padding:12px}
+    .card-title{font-weight:600;margin-bottom:6px}
+    .card-meta{display:flex;gap:12px;align-items:center;color:#6b7280;font-size:13px}
+    .card-actions{display:flex;justify-content:space-between;align-items:center;padding:12px;border-top:1px solid #f3f4f6}
+    .btn{background:#8b3cff;color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    .ghost{background:transparent;border:1px solid #e5e7eb;padding:8px 12px;border-radius:8px}
+
+    /* -------------------------
+       Footer
+       ------------------------- */
+    footer{background:#0f172a;color:#cbd5e1;padding:26px 0;margin-top:34px}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}
+
+    /* -------------------------
+       Responsive tweaks
+       ------------------------- */
+    @media (max-width:900px){
+      .hero{flex-direction:column}
+      .hero-right{width:100%}
+    }
+
+    /* -------------------------
+       Helpful visual utilities
+       ------------------------- */
+    .muted{color:#6b7280}
+    .mt-8{margin-top:8px}
+    .mb-12{margin-bottom:12px}
+
+    /* -------------------------
+       Large lists styling (for long file)
+       ------------------------- */
+    .restaurant-list-long .card{display:flex;gap:12px;align-items:stretch}
+    .restaurant-list-long .card img{width:220px;height:140px}
+    .restaurant-list-long .card-body{flex:1}
+
+    /* Slight scrollbar styling for desktop*/
+    ::-webkit-scrollbar{height:10px;width:8px}
+    ::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:8px}
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container topbar">
+      <div class="brand">
+        <img src="logo.png" , alt="logo">
+        <div>
+          <h1>FoodExpress</h1>
+          <div class="muted">Fresh food. Fast delivery.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="muted">Hi, Guest</div>
+        <a href="cart.html" class="btn">🛒 Cart</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="search-row">
+        <input class="search-input" id="globalSearch" placeholder="Search for dishes or restaurants, e.g., Biryani, Pizza, Rolls" />
+        <button class="search-btn" id="searchBtn">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <h2>Order from the best nearby restaurants</h2>
+        <p class="muted">Fast delivery • Live order tracking • Secure payments</p>
+
+        <div style="margin-top:12px">
+          <a href="#restaurants" class="cta">Browse Restaurants</a>
+        </div>
+
+        <div class="mt-8 muted">Popular searches: <strong>Biryani</strong>, <strong>Chicken</strong>, <strong>Paneer</strong>, <strong>Pasta</strong></div>
+      </div>
+
+      <div class="hero-right">
+        <img src="restaurant.png" alt="hero" style="width:100%;border-radius:12px;object-fit:cover" />
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section>
+      <div class="chips" id="categoryChips">
+        <!-- example chip -->
+        <div class="chip"><img src="logo2.png" alt="pizza" /> Pizza</div>
+        <div class="chip"><img src="logo3.png" alt="biryani" /> Biryani</div>
+        <div class="chip"><img src="logo1.png" alt="burger" /> Burger</div>
+        <div class="chip"><img src="logo5.png" alt="salad" /> Healthy</div>
+        <div class="chip"><img src="logo8.png" alt="dessert" /> Desserts</div>
+        <div class="chip"><img src="logo7.png" alt="drinks" /> Beverages</div>
+      </div>
+    </section>
+
+    <!-- RESTAURANTS PREVIEW GRID -->
+
+    <section id="restaurants">
+      <h3 style="margin-bottom:10px">Top Restaurants</h3>
+
+      <div class="grid" id="topGrid">
+        <!-- We'll include many cards so you have plenty to copy and images -->
+
+        <!-- Card 1 -->
+        <article class="card">
+          <img src="res1.png" alt="seekh" />
+          <div class="card-body">
+            <div class="card-title">flavor Hub</div>
+            <div class="card-meta">
+              <div>⭐ 4.6</div>
+              <div>•</div>
+              <div>35 mins</div>
+              <div>•</div>
+              <div class="muted">bandra, cheesy peri peri fries</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=1">View Menu</a>
+            <button class="btn" onclick="quickAddSample(1)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <img src="res2.png" alt="biryani" />
+          <div class="card-body">
+            <div class="card-title">The Spice Street</div>
+            <div class="card-meta"><div>⭐ 4.7</div><div>•</div><div>40 mins</div><div>•</div><div class="muted">Spicy Tandoori Momost, delhi</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=2">View Menu</a>
+            <button class="btn" onclick="quickAddSample(2)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <img src="res3.png" alt="tandoori" />
+          <div class="card-body">
+            <div class="card-title">Tandoori Nights</div>
+            <div class="card-meta"><div>⭐ 4.5</div><div>•</div><div>30 mins</div><div>•</div><div class="muted">Grill, North Indian</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=3">View Menu</a>
+            <button class="btn" onclick="quickAddSample(3)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card">
+          <img src="res4.png" alt="pizza" />
+          <div class="card-body">
+            <div class="card-title">Pizza Palace</div>
+            <div class="card-meta"><div>⭐ 4.4</div><div>•</div><div>25 mins</div><div>•</div><div class="muted">Pizza, Italian</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=4">View Menu</a>
+            <button class="btn" onclick="quickAddSample(4)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="card">
+          <img src="res5.png" alt="wraps" />
+          <div class="card-body">
+            <div class="card-title">Roll & Wrap</div>
+            <div class="card-meta"><div>⭐ 4.3</div><div>•</div><div>22 mins</div><div>•</div><div class="muted">Fast Food</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=5">View Menu</a>
+            <button class="btn" onclick="quickAddSample(5)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="card">
+          <img src="res7.png" alt="salad" />
+          <div class="card-body">
+            <div class="card-title">Green Bowl</div>
+            <div class="card-meta"><div>⭐ 4.2</div><div>•</div><div>20 mins</div><div>•</div><div class="muted">Healthy, Salads</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=6">View Menu</a>
+            <button class="btn" onclick="quickAddSample(6)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="card">
+          <img src="res8.png" alt="sweets" />
+          <div class="card-body">
+            <div class="card-title">Sweet Tooth</div>
+            <div class="card-meta"><div>⭐ 4.9</div><div>•</div><div>18 mins</div><div>•</div><div class="muted">Desserts</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=7">View Menu</a>
+            <button class="btn" onclick="quickAddSample(7)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 8 -->
+        <article class="card">
+          <img src="res9.png" alt="noodles" />
+          <div class="card-body">
+            <div class="card-title">Noodle Hub</div>
+            <div class="card-meta"><div>⭐ 4.1</div><div>•</div><div>28 mins</div><div>•</div><div class="muted">Chinese</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=8">View Menu</a>
+            <button class="btn" onclick="quickAddSample(8)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 9 -->
+        <article class="card">
+          <img src="res10" alt="sandwich" />
+          <div class="card-body">
+            <div class="card-title">Sandwich Corner</div>
+            <div class="card-meta"><div>⭐ 4.0</div><div>•</div><div>16 mins</div><div>•</div><div class="muted">Cafe, Quick Bites</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=9">View Menu</a>
+            <button class="btn" onclick="quickAddSample(9)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Card 10 -->
+        <article class="card">
+          <img src="res11.png" alt="pasta" />
+          <div class="card-body">
+            <div class="card-title">Pasta House</div>
+            <div class="card-meta"><div>⭐ 4.4</div><div>•</div><div>24 mins</div><div>•</div><div class="muted">Italian</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=10">View Menu</a>
+            <button class="btn" onclick="quickAddSample(10)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- To make this file very large (as you requested), we repeat many more cards programmatically
+             below — this helps reach 500+ lines with useful content. -->
+
+      </div>
+    </section>
+
+    <!-- LONG RESTAURANT LIST (repeated entries) -->
+    <section class="restaurant-list-long mt-8" style="margin-top:26px">
+      <h3>More Restaurants (Full List)</h3>
+
+      <!-- We'll include 30 repeated cards with different images and names to give you lots of HTML to copy -->
+
+      <div id="longList">
+
+        <!-- Repeated block template - you can copy/paste these into other pages as needed -->
+
+        <!-- Block 11 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res12.png" alt="r11" />
+          <div class="card-body">
+            <div class="card-title">Cafe Aroma</div>
+            <div class="card-meta"><div>⭐ 4.2</div><div>•</div><div>14 mins</div><div>•</div><div class="muted">Cafe</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=11">View Menu</a>
+            <button class="btn" onclick="quickAddSample(11)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 12 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res13.png" alt="r12" />
+          <div class="card-body">
+            <div class="card-title">Spice Route</div>
+            <div class="card-meta"><div>⭐ 4.6</div><div>•</div><div>29 mins</div><div>•</div><div class="muted">Indian</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=12">View Menu</a>
+            <button class="btn" onclick="quickAddSample(12)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 13 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res14.png" alt="r13" />
+          <div class="card-body">
+            <div class="card-title">Mughlai Delights</div>
+            <div class="card-meta"><div>⭐ 4.8</div><div>•</div><div>33 mins</div><div>•</div><div class="muted">Mughlai</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=13">View Menu</a>
+            <button class="btn" onclick="quickAddSample(13)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 14 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res15.png" alt="r14" />
+          <div class="card-body">
+            <div class="card-title">Grill Master</div>
+            <div class="card-meta"><div>⭐ 4.3</div><div>•</div><div>27 mins</div><div>•</div><div class="muted">BBQ</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=14">View Menu</a>
+            <button class="btn" onclick="quickAddSample(14)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 15 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res16.png" alt="r15" />
+          <div class="card-body">
+            <div class="card-title">Sizzle & Spice</div>
+            <div class="card-meta"><div>⭐ 4.2</div><div>•</div><div>31 mins</div><div>•</div><div class="muted">Asian</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=15">View Menu</a>
+            <button class="btn" onclick="quickAddSample(15)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 16 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res17.png" alt="r16" />
+          <div class="card-body">
+            <div class="card-title">Kebab Junction</div>
+            <div class="card-meta"><div>⭐ 4.0</div><div>•</div><div>26 mins</div><div>•</div><div class="muted">Kebabs</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=16">View Menu</a>
+            <button class="btn" onclick="quickAddSample(16)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 17 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res18.pngS" alt="r17" />
+          <div class="card-body">
+            <div class="card-title">Brew & Bites</div>
+            <div class="card-meta"><div>⭐ 4.1</div><div>•</div><div>19 mins</div><div>•</div><div class="muted">Cafe</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=17">View Menu</a>
+            <button class="btn" onclick="quickAddSample(17)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 18 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res19.png" alt="r18" />
+          <div class="card-body">
+            <div class="card-title">Momo Express</div>
+            <div class="card-meta"><div>⭐ 4.4</div><div>•</div><div>17 mins</div><div>•</div><div class="muted">Tibetan</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=18">View Menu</a>
+            <button class="btn" onclick="quickAddSample(18)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 19 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res20.png" alt="r19" />
+          <div class="card-body">
+            <div class="card-title">Sushi Corner</div>
+            <div class="card-meta"><div>⭐ 4.6</div><div>•</div><div>29 mins</div><div>•</div><div class="muted">Japanese</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=19">View Menu</a>
+            <button class="btn" onclick="quickAddSample(19)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 20 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res21.png" alt="r20" />
+          <div class="card-body">
+            <div class="card-title">Wrap World</div>
+            <div class="card-meta"><div>⭐ 4.3</div><div>•</div><div>21 mins</div><div>•</div><div class="muted">Wraps</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=20">View Menu</a>
+            <button class="btn" onclick="quickAddSample(20)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 21 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res22.png" alt="r21" />
+          <div class="card-body">
+            <div class="card-title">Naan & Curry</div>
+            <div class="card-meta"><div>⭐ 4.5</div><div>•</div><div>34 mins</div><div>•</div><div class="muted">North Indian</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=21">View Menu</a>
+            <button class="btn" onclick="quickAddSample(21)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 22 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res23.png" alt="r22" />
+          <div class="card-body">
+            <div class="card-title">Quick Eats</div>
+            <div class="card-meta"><div>⭐ 3.9</div><div>•</div><div>12 mins</div><div>•</div><div class="muted">Fast Food</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=22">View Menu</a>
+            <button class="btn" onclick="quickAddSample(22)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 23 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res24.png" alt="r23" />
+          <div class="card-body">
+            <div class="card-title">Spice Villa</div>
+            <div class="card-meta"><div>⭐ 4.4</div><div>•</div><div>36 mins</div><div>•</div><div class="muted">Indian</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=23">View Menu</a>
+            <button class="btn" onclick="quickAddSample(23)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 24 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res25.png" alt="r24" />
+          <div class="card-body">
+            <div class="card-title">The Grill House</div>
+            <div class="card-meta"><div>⭐ 4.5</div><div>•</div><div>28 mins</div><div>•</div><div class="muted">Grill</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=24">View Menu</a>
+            <button class="btn" onclick="quickAddSample(24)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 25 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res26.png" alt="r25" />
+          <div class="card-body">
+            <div class="card-title">Veggie Delight</div>
+            <div class="card-meta"><div>⭐ 4.1</div><div>•</div><div>20 mins</div><div>•</div><div class="muted">Vegetarian</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=25">View Menu</a>
+            <button class="btn" onclick="quickAddSample(25)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 26 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res27.png" alt="r26" />
+          <div class="card-body">
+            <div class="card-title">Rolls & Co</div>
+            <div class="card-meta"><div>⭐ 4.0</div><div>•</div><div>15 mins</div><div>•</div><div class="muted">Rolls</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=26">View Menu</a>
+            <button class="btn" onclick="quickAddSample(26)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 27 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res28.png" alt="r27" />
+          <div class="card-body">
+            <div class="card-title">Bistro Central</div>
+            <div class="card-meta"><div>⭐ 4.6</div><div>•</div><div>32 mins</div><div>•</div><div class="muted">Cafe, European</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=27">View Menu</a>
+            <button class="btn" onclick="quickAddSample(27)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 28 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res29.png" alt="r28" />
+          <div class="card-body">
+            <div class="card-title">Steakhouse 21</div>
+            <div class="card-meta"><div>⭐ 4.2</div><div>•</div><div>40 mins</div><div>•</div><div class="muted">Steak</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=28">View Menu</a>
+            <button class="btn" onclick="quickAddSample(28)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 29 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res30.png" alt="r29" />
+          <div class="card-body">
+            <div class="card-title">Saffron Table</div>
+            <div class="card-meta"><div>⭐ 4.7</div><div>•</div><div>37 mins</div><div>•</div><div class="muted">Indian, Halal</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=29">View Menu</a>
+            <button class="btn" onclick="quickAddSample(29)">Add Sample</button>
+          </div>
+        </article>
+
+        <!-- Block 30 -->
+        <article class="card" style="margin-top:12px">
+          <img src="res31.png" alt="r30" />
+          <div class="card-body">
+            <div class="card-title">Bakes & More</div>
+            <div class="card-meta"><div>⭐ 4.3</div><div>•</div><div>18 mins</div><div>•</div><div class="muted">Bakery</div></div>
+          </div>
+          <div class="card-actions">
+            <a class="ghost" href="restaurant.html?rid=30">View Menu</a>
+            <button class="btn" onclick="quickAddSample(30)">Add Sample</button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PROMO / HOW IT WORKS -->
+    <section style="margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;align-items:start">
+      <div style="background:linear-gradient(180deg,#fff7f4,#fff);padding:18px;border-radius:12px;box-shadow:0 6px 22px rgba(16,24,40,0.04)">
+        <h4>How it works</h4>
+        <ol style="margin-top:10px;padding-left:18px;color:#374151">
+          <li>Search or choose a restaurant</li>
+          <li>Add items to cart</li>
+          <li>Checkout and pay</li>
+          <li>Track order in real-time</li>
+        </ol>
+      </div>
+
+      <div style="background:white;padding:18px;border-radius:12px;box-shadow:0 6px 22px rgba(16,24,40,0.04)">
+        <h4>Why choose FoodExpress?</h4>
+        <ul style="margin-top:10px;padding-left:18px;color:#374151">
+          <li>Fast delivery partners</li>
+          <li>Secure payments</li>
+          <li>High quality images and menus</li>
+        </ul>
+      </div>
+
+      <div style="background:white;padding:18px;border-radius:12px;box-shadow:0 6px 22px rgba(16,24,40,0.04)">
+        <h4>Download our app</h4>
+        <p class="muted">(Placeholder — link to Play Store when you build native app)</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
+        <div>
+          <h4>FoodExpress</h4>
+          <div class="muted">Delivering happiness to your door</div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:center">
+          <a class="ghost" href="#">Privacy</a>
+          <a class="ghost" href="#">Terms</a>
+          <a class="ghost" href="#">Contact</a>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;color:#94a3b8">© 2025 FoodExpress — Built by you</div>
+    </div>
+  </footer>
+
+  <!-- Inline script (so this single file is functional). Later, I'll send separate script.js and data.js files when you say done. -->
+  <script>
+    // -------------------------
+    // Sample data & helper functions
+    // -------------------------
+
+    const sampleMenuByRid = {
+      1: [
+        {id:101,name:'tomato pasta',price:120,img:'food.png'},
+        {id:102,name:'Mutton Biryani',price:210,img:'food1.png'},
+        {id:103,name:'Chicken Fry',price:160,img:'food12.png'}
+      ],
+      2: [
+        {id:201,name:'Chicken Biryani',price:160,img:'https://i.ibb.co/fd152QF/food2.jpg'},
+        {id:202,name:'Veg Biryani',price:130,img:'https://i.ibb.co/2FsfXqM/food9.jpg'}
+      ],
+      // small example sets for other rids
+      3: [{id:301,name:'Tandoori Chicken',price:220,img:'https://i.ibb.co/KVb815m/food3.jpg'}],
+      4: [{id:401,name:'Margherita Pizza',price:240,img:'https://i.ibb.co/0s3pdnc/food4.jpg'}],
+      5: [{id:501,name:'Chicken Roll',price:90,img:'https://i.ibb.co/dKc1s7P/food5.jpg'}],
+      // others use the same placeholder
+    };
+
+    // Save quick add to localStorage cart
+    function quickAddSample(rid){
+      const menu = sampleMenuByRid[rid] || [{id:900,name:'Chef Special',price:99,img:'https://i.ibb.co/7QpKsCX/logo-sample.png'}];
+      const item = menu[0];
+      let cart = JSON.parse(localStorage.getItem('cart')||'[]');
+      cart.push({...item, qty:1, rid});
+      localStorage.setItem('cart',JSON.stringify(cart));
+      alert(item.name + ' added to cart');
+    }
+
+    // Global search (very simple)
+    document.getElementById('searchBtn').addEventListener('click',function(){
+      const q = document.getElementById('globalSearch').value.trim().toLowerCase();
+      if(!q)return alert('Please type something to search');
+      // very simple filter: check card titles
+      const cards = Array.from(document.querySelectorAll('.card'));
+      let found=false;
+      cards.forEach(c=>{
+        const title = (c.querySelector('.card-title')||{textContent:''}).textContent.toLowerCase();
+        if(title.includes(q)){
+          c.style.display='block';
+          found=true;
+        } else {
+          c.style.display='none';
+        }
+      });
+      if(!found) alert('No results found for: '+q);
+      // scroll to results
+      window.scrollTo({top:document.getElementById('restaurants').offsetTop-20,behavior:'smooth'});
+    });
+
+    // On load: if there's a search param like ?q=..., prefill
+    (function prefillFromQuery(){
+      try{
+        const params = new URLSearchParams(window.location.search);
+        if(params.get('q')){
+          document.getElementById('globalSearch').value = params.get('q');
+          document.getElementById('searchBtn').click();
+        }
+      }catch(e){}
+    })();
+
+    // Mobile friendly: add touch hint for first-time users
+    (function mobileHint(){
+      try{
+        if(window.innerWidth<600 && !localStorage.getItem('seenTouchHint')){
+          localStorage.setItem('seenTouchHint','1');
+          // a very small non-blocking hint
+          const el = document.createElement('div');
+          el.style.position='fixed';el.style.bottom='18px';el.style.left='18px';el.style.background='rgba(0,0,0,0.7)';el.style.color='white';el.style.padding='10px 12px';el.style.borderRadius='10px';el.textContent='Tip: Tap "View Menu" to open restaurant menu';
+          document.body.appendChild(el);
+          setTimeout(()=>el.remove(),5000);
+        }
+      }catch(e){}
+    })();
+
+    // Accessibility small improvements
+    (function accessibility(){
+      const btns = document.querySelectorAll('.btn, .ghost');
+      btns.forEach(b=>b.setAttribute('tabindex','0'));
+    })();
+
+    // Add 50+ sample images dynamically to the page to satisfy "more images" request
+    (function injectMoreImages(){
+      const extra = [
+        '<img:"food12.png">'https://i.ibb.co/fd152QF/food2.jpg','https://i.ibb.co/KVb815m/food3.jpg',
+        'https://i.ibb.co/0s3pdnc/food4.jpg','https://i.ibb.co/dKc1s7P/food5.jpg','https://i.ibb.co/3B6zY1k/hero-food.jpg',
+        'https://i.ibb.co/ZYW3VTp/food6.jpg','https://i.ibb.co/6v1Q9Ff/food7.jpg','https://i.ibb.co/HV6zQ1m/food8.jpg',
+        'https://i.ibb.co/2FsfXqM/food9.jpg'
+      ];
+
+      const container = document.getElementById('topGrid');
+      // create 20 small gallery cards
+      for(let i=31;i<=60;i++){
+        const art = document.createElement('article');
+        art.className='card';
+        art.innerHTML = `\n          <img src="${extra[i%extra.length]}" alt="img${i}" />\n          <div class="card-body">\n            <div class="card-title">Sample Place ${i}</div>\n            <div class="card-meta"><div>⭐ ${(3.9+Math.random()).toFixed(1)}</div><div>•</div><div>${15+Math.floor(Math.random()*40)} mins</div><div>•</div><div class="muted">Multi-cuisine</div></div>\n          </div>\n          <div class="card-actions">\n            <a class="ghost" href=\"restaurant.html?rid=${i}\">View Menu</a>\n            <button class="btn" onclick=\"quickAddSample(${i})\">Add Sample</button>\n          </div>\n        `;
+        container.appendChild(art);
+      }
+    })();
+
+    // Provide a small developer helper so you know where to find the cart
+    console.log('FoodExpress: Open cart with localStorage key "cart". Use quickAddSample(rid) to add sample items.');
+  </script>
+
+</body>
+</html>
